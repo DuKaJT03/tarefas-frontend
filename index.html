@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Minhas Tarefas</title>
+
+    <!-- conecta o CSS-->
+     <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Lista de Tarefas</h1>
+
+    <!-- formulário -->
+    <div>
+        <input type="text" id="titulo" placeholder="Titulo">
+        <input type="text" id="descricao" placeholder="Descrição">
+        <input type="date" id="data">
+    </div>
+
+    <select id="status">
+        <option value="PENDENTE">Pendente</option>
+        <option value="EM_ANDAMENTO">Em andamento</option>
+        <option value="CONCLUIDO">Concluído</option>
+    </select>
+
+    <label>
+        <input type="checkbox" id="concluida">Concluida
+    </label>
+
+      
+    <button onclick="criarTarefa()">Adicionar</button>
+     <!-- lista -->
+      <ul id="listaTarefas"></ul>
+
+      
+      <!-- conecta o JS-->
+       <script src="script.js"></script>
+    
+</body>
+</html>
