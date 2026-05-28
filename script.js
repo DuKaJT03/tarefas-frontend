@@ -159,15 +159,18 @@ function concluirTarefa(id, titulo, descricao, data){
             concluida: true
         })
     })
-    .then(response => {
+    .then(async response => {
 
         if(!response.ok){
+
+            const erro = await response.text();
+            console.log("ERRO BACKEND:", erro);
+
             throw new Error("Erro ao concluir tarefa");
         }
 
         carregarTarefas();
     })
-    .catch(error => console.error(error));
 }
 
 //DELETAR
