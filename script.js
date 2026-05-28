@@ -37,7 +37,7 @@ function carregarTarefas() {
                             \`${tarefa.data}\`
 
                         )">
-                            ${tarefa.concluida ? "Concluid ✓" : "Concluir"}
+                            ${tarefa.concluida ? "Concluido ✓" : "Concluir"}
                         </button>
                         <br><br>
                     <button onclick="editar(
@@ -155,7 +155,7 @@ function concluirTarefa(id, titulo, descricao, data){
             titulo: titulo,
             descricao: descricao,
             data: data,
-            status: "CONCLUIDA",
+            status: "CONCLUIDO",
             concluida: true
         })
     })
