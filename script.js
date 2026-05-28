@@ -31,7 +31,7 @@ function carregarTarefas() {
                     Concluída: ${tarefa.concluida ? "Sim" : "Não"}<br>
 
                     <button onclick="editar(
-                        ${tarefas.id},
+                        ${tarefa.id},
                         \`${tarefa.titulo}\`,
                         \`${tarefa.descricao}\`,
                         \`${tarefa.data}\`,
