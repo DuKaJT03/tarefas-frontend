@@ -146,7 +146,7 @@ function concluirTarefa(id){
         .then(response => response.json())
         .then(tarefa =>{
 
-            terefa.concluida = true;
+            tarefa.concluida = true;
             tarefa.status = "CONCLUIDA";
 
             return fetch(`${API}/${id}`,{
