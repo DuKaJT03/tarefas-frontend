@@ -28,8 +28,13 @@ function carregarTarefas() {
                     ${tarefa.descricao}<br>
                     ${tarefa.data}<br>
                     Status: ${tarefa.status}<br>
-                    Concluída: ${tarefa.concluida ? "Sim" : "Não"}<br>
-
+                    Concluída: 
+                        <input 
+                            type="checkbox"
+                            ${tarefa.concluida ? "checked" : ""}
+                            onchange="alterarConclusao(${tarefa.id}, this.checked)"
+                        >
+                        <br>
                     <button onclick="editar(
                         ${tarefa.id},
                         \`${tarefa.titulo}\`,
@@ -73,7 +78,6 @@ function criarTarefa(){
     const descricao = document.getElementById("descricao").value;
     const status = document.getElementById("status").value;
     const data = document.getElementById("data").value;
-    const concluida = document.getElementById("concluida").checked;
     
     if(!titulo || !descricao){
         alert("Preencher todos os campos!");
@@ -90,7 +94,7 @@ function criarTarefa(){
             descricao: descricao,
             data: data,
             status: status,
-            concluida: concluida
+            concluida: false
         })
     })
     .then(() => {
@@ -133,6 +137,26 @@ function editar(id, titulo, descricao, data, status, concluida){
         }
         carregarTarefas();
     });
+}
+
+function alterarConclusao(id, concluida){
+    
+    fetch(`${API}/${id}`)
+        .then(response => response.json())
+        .then(tarefa => {
+
+            tarefa.concluida = concluida;
+
+            return fetch(`${API}/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(tarefa)
+            });
+        })
+        .then(() => carregarTarefas())
+        .catch(error => console.error(error));
 }
 
 //DELETAR
