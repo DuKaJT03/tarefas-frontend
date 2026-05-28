@@ -30,10 +30,14 @@ function carregarTarefas() {
                     Status: ${tarefa.status}<br>
 
                         <button 
-                        onclick= "concluirTarefa(${tarefa.id})"
-                            ${tarefa.concluida ? "disabled" : ""}
-                        >
-                            ${tarefa.concluida ? "Concluida" : "Concluir"}
+                        onclick= "concluirTarefa(
+                            ${tarefa.id},
+                            \`${tarefa.titulo}\`,
+                            \`${tarefa.descricao}\`,
+                            \`${tarefa.data}\`
+
+                        )">
+                            ${tarefa.concluida ? "Concluid ✓" : "Concluir"}
                         </button>
                         <br><br>
                     <button onclick="editar(
@@ -140,25 +144,30 @@ function editar(id, titulo, descricao, data, status, concluida){
     });
 }
 
-function concluirTarefa(id){
+function concluirTarefa(id, titulo, descricao, data){
 
-    fetch(`${API}/${id}`)
-        .then(response => response.json())
-        .then(tarefa =>{
-
-            tarefa.concluida = true;
-            tarefa.status = "CONCLUIDA";
-
-            return fetch(`${API}/${id}`,{
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(tarefa)
-            });
+    fetch(`${API}/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            titulo: titulo,
+            descricao: descricao,
+            data: data,
+            status: "CONCLUIDA",
+            concluida: true
         })
-        .then(() => carregarTarefas())
-        .catch(error => console.error(error));
+    })
+    .then(response => {
+
+        if(!response.ok){
+            throw new Error("Erro ao concluir tarefa");
+        }
+
+        carregarTarefas();
+    })
+    .catch(error => console.error(error));
 }
 
 //DELETAR
