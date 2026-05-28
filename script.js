@@ -28,13 +28,14 @@ function carregarTarefas() {
                     ${tarefa.descricao}<br>
                     ${tarefa.data}<br>
                     Status: ${tarefa.status}<br>
-                    Concluída: 
-                        <input 
-                            type="checkbox"
-                            ${tarefa.concluida ? "checked" : ""}
-                            onchange="alterarConclusao(${tarefa.id}, this.checked)"
+
+                        <button 
+                        onclick= "concluirTarefa(${tarefa.id})"
+                            ${tarefa.concluida ? "disabled" : ""}
                         >
-                        <br>
+                            ${tarefa.concluida ? "Concluida" : "Concluir"}
+                        </button>
+                        <br><br>
                     <button onclick="editar(
                         ${tarefa.id},
                         \`${tarefa.titulo}\`,
@@ -139,15 +140,16 @@ function editar(id, titulo, descricao, data, status, concluida){
     });
 }
 
-function alterarConclusao(id, concluida){
-    
+function concluirTarefa(id){
+
     fetch(`${API}/${id}`)
         .then(response => response.json())
-        .then(tarefa => {
+        .then(tarefa =>{
 
-            tarefa.concluida = concluida;
+            terefa.concluida = true;
+            tarefa.status = "CONCLUIDA";
 
-            return fetch(`${API}/${id}`, {
+            return fetch(`${API}/${id}`,{
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
