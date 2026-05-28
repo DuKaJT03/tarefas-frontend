@@ -29,13 +29,11 @@ function carregarTarefas() {
                     ${tarefa.data}<br>
                     Status: ${tarefa.status}<br>
 
-                        <button 
-                        onclick= "concluirTarefa(
+                        <button onclick= "concluirTarefa(
                             ${tarefa.id},
                             \`${tarefa.titulo}\`,
                             \`${tarefa.descricao}\`,
                             \`${tarefa.data}\`
-
                         )">
                             ${tarefa.concluida ? "Concluido ✓" : "Concluir"}
                         </button>
@@ -84,7 +82,7 @@ function criarTarefa(){
     const status = document.getElementById("status").value;
     const data = document.getElementById("data").value;
     
-    if(!titulo || !descricao){
+    if(!titulo || !descricao || !data){
         alert("Preencher todos os campos!");
         return;
     }
