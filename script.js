@@ -146,18 +146,21 @@ function editar(id, titulo, descricao, data, status, concluida){
 
 function concluirTarefa(id, titulo, descricao, data){
 
+    const dados = {
+        titulo: titulo,
+        descricao: descricao,
+        data: data,
+        status: "CONCLUIDO",
+        concluida: true
+    };
+    console.log(dados);
+
     fetch(`${API}/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-            titulo: titulo,
-            descricao: descricao,
-            data: data,
-            status: "CONCLUIDO",
-            concluida: true
-        })
+        body: JSON.stringify(dados)
     })
     .then(async response => {
 
