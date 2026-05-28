@@ -2,10 +2,22 @@ const API = "https://tarefas-api-8ein.onrender.com/tarefas";
 
 //Listar tarefas
 function carregarTarefas() {
+    
+    const lista = document.getElementById("listaTarefas");
+    const loading = document.getElementById("loading");
+
+    loading.style.display = "block";
+
     fetch(API)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok){
+                throw new Error("Erro ao carregar tarefas");
+            }
+
+            return response.json()
+        })
+
         .then(dados => {
-            const lista = document.getElementById("listaTarefas");
             lista.innerHTML = "";
 
             dados.forEach(tarefa => {
@@ -16,21 +28,42 @@ function carregarTarefas() {
                     ${tarefa.descricao}<br>
                     ${tarefa.data}<br>
                     Status: ${tarefa.status}<br>
-                    Concluida: ${tarefa.concluida ? "Sim" : "Não"}<br>
+                    Concluída: ${tarefa.concluida ? "Sim" : "Não"}<br>
 
                     <button onclick="editar(
-                        ${tarefa.id}, 
-                        \`${tarefa.titulo}\`, 
+                        ${tarefas.id},
+                        \`${tarefa.titulo}\`,
                         \`${tarefa.descricao}\`,
                         \`${tarefa.data}\`,
                         \`${tarefa.status}\`,
                         ${tarefa.concluida}
                     )">Editar</button>
-                    <button onclick="deletar(${tarefa.id})">X</button>
+
+                    <button onclick="deletar(${tarefa.id})">
+                        X
+                    </button>
                 `;
 
                 lista.appendChild(item);
             });
+        })
+
+        .catch(error => {
+            console.error(error);
+
+            lista.innerHTML = `
+                <li>
+                    Não foi possível carregar as tarefas.
+                    <br>
+                    O servidor pode estar iniciando.
+                    <br><br>
+                    Tente novamente em alguns segundos.
+                </li>
+            `;
+        })
+
+        .finally(() => {
+            loading.style.display = "none";
         });
 }
 
