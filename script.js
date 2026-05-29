@@ -107,7 +107,6 @@ function criarTarefa(){
     document.getElementById("titulo").value = "";
     document.getElementById("descricao").value = "";
     document.getElementById("data").value = "";
-    document.getElementById("concluida").checked = false;
 }
 
 //EDITAR
