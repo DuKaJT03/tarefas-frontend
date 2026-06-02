@@ -22,14 +22,31 @@ function carregarTarefas() {
 
             dados.forEach(tarefa => {
                 const item = document.createElement("li");
+                const dataFormatada = new Date(tarefa.data).toLocaleDateString("pt-BR");
 
+                let classeStatus= "";
+
+                if(tarefa.status === "PENDENTE"){
+                    classeStatus = "status-pendente";
+                }else if(tarefa.status === "EM_ANDAMENTO"){
+                    classeStatus = "status-andamento";
+                }else if(tarefa.status === "CONCLUIDO"){
+                    classeStatus = "status-concluido";
+                }
+
+                item.classList.add("tarefa-card");
                 item.innerHTML = `
-                    <strong>${tarefa.titulo}</strong><br>
-                    ${tarefa.descricao}<br>
-                    ${tarefa.data}<br>
-                    Status: ${tarefa.status}<br>
-
-                        <button onclick= "concluirTarefa(
+                    <div class="info-tarefa">
+                        <strong>${tarefa.titulo}</strong><br>
+                        ${tarefa.descricao}<br>
+                        ${dataFormatada}<br>
+                    </div>
+                    
+                    <div class="${classeStatus}">
+                        ${tarefa.status.replace("_", " ")}
+                    </div>
+                    <div class="acoes">
+                        <button class="btn-concluir" onclick= "concluirTarefa(
                             ${tarefa.id},
                             \`${tarefa.titulo}\`,
                             \`${tarefa.descricao}\`,
@@ -37,19 +54,19 @@ function carregarTarefas() {
                         )">
                             ${tarefa.concluida ? "Concluido ✓" : "Concluir"}
                         </button>
-                        <br><br>
-                    <button onclick="editar(
-                        ${tarefa.id},
-                        \`${tarefa.titulo}\`,
-                        \`${tarefa.descricao}\`,
-                        \`${tarefa.data}\`,
-                        \`${tarefa.status}\`,
-                        ${tarefa.concluida}
-                    )">Editar</button>
+                        <button class="btn-editar" onclick="editar(
+                            ${tarefa.id},
+                            \`${tarefa.titulo}\`,
+                            \`${tarefa.descricao}\`,
+                            \`${tarefa.data}\`,
+                            \`${tarefa.status}\`,
+                            ${tarefa.concluida}
+                        )">Editar</button>
 
-                    <button onclick="deletar(${tarefa.id})">
-                        X
-                    </button>
+                        <button class="btn-excluir" onclick="deletar(${tarefa.id})">
+                            Excluir
+                        </button>
+                    </div>
                 `;
 
                 lista.appendChild(item);

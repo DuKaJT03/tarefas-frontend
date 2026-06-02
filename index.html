@@ -7,35 +7,44 @@
     <!-- conecta o CSS-->
      <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <div class="container">
+        <h1>Lista de Tarefas</h1>
+        <p class="subtitulo">
+            Adicione, organize e acompanhe suas tarefas.
+        </p>
+        <!-- formulário -->
+        <div class="formulario">
+            <input type="text" id="titulo" placeholder="Titulo">
+            <input type="text" id="descricao" placeholder="Descrição">
+            <input type="date" id="data">
+        
 
-    <h1>Lista de Tarefas</h1>
+            <select id="status">
+                <option value="PENDENTE">Pendente</option>
+                <option value="EM_ANDAMENTO">Em andamento</option>
+                <option value="CONCLUIDO">Concluído</option>
+            </select>
 
-    <!-- formulário -->
-    <div>
-        <input type="text" id="titulo" placeholder="Titulo">
-        <input type="text" id="descricao" placeholder="Descrição">
-        <input type="date" id="data">
+            <button 
+                class="btn-adicionar"
+                onclick="criarTarefa()">
+                Adicionar
+            </button>
+
+        </div>
+
+        <div id="loading" style="display: none;">⌛ Carregando tarefas...
+            <br>
+            O servidor pode levar alguns segundos para iniciar.
+        </div>
+        <!-- lista -->
+        <ul id="listaTarefas"></ul>
+
+
+        <!-- conecta o JS-->
+        <script src="script.js"></script>
     </div>
-
-    <select id="status">
-        <option value="PENDENTE">Pendente</option>
-        <option value="EM_ANDAMENTO">Em andamento</option>
-        <option value="CONCLUIDO">Concluído</option>
-    </select>
-
-    <button onclick="criarTarefa()">Adicionar</button>
-
-    <div id="loading" style="display: none;">⌛ Carregando tarefas...
-        <br>
-        O servidor pode levar alguns segundos para iniciar.
-    </div>
-     <!-- lista -->
-      <ul id="listaTarefas"></ul>
-
-      
-      <!-- conecta o JS-->
-       <script src="script.js"></script>
-    
 </body>
 </html>

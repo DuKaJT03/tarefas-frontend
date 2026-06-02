@@ -1,23 +1,36 @@
 body {
     font-family: Arial;
     margin: 20px;
+    background: linear-gradient(
+        135deg,
+        #F8FAFC,
+        #EEF3F8
+    );
 }
 
-input {
-    margin: 5px;
-    padding: 5px;
+input:focus,
+select:focus{
+    border-color: #4F7DCf;
+
+    box-shadow: 
+        0 0 0 4px
+        rgba(70, 125, 207, .15);
+
+    outline: none;
+}
+
+input,
+select{
+    padding: 12px;
+    border: 1px solid #DBE3EF;
+    border-radius: 10px;
+    font-size: 15px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 button {
-    padding: 5px 10px;
     cursor: pointer;
-}
-
-li{
-    margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
 }
 
 #loading{
@@ -39,4 +52,212 @@ li{
     100%{
         opacity: 0.4;
     }
+}
+
+.info-tarefa strong{
+    font-size: 18px;
+    color: #1E293B;
+}
+
+.info-tarefa{
+    color: #475569;
+    line-height: 1.6;
+}
+
+h1{
+    margin-bottom: 8px;
+}
+
+.subtitulo{
+    margin-top: 0;
+    margin-bottom: 30px;
+    color: #64748b;
+}
+
+.tarefa-card{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    animation: aparecer .4s ease;
+    border: 1px solid #E2E8F0;
+    will-change: transform;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .03);
+}
+
+.tarefa-card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.status-andamento,
+.status-pendente,
+.status-concluido{
+    padding: 8px 12px;
+    border-radius: 999px;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.status-pendente{
+    background: #FFF7E6;
+    color: #D48806;
+}
+
+.status-andamento{
+    background: #E6F4FF;
+    color: #1677FF;
+}
+
+.status-concluido{
+    background: #F6FFED;
+    color: #389E0D;
+}
+
+.acoes{
+    display: flex;
+    gap: 10px;
+}
+
+.btn-editar:hover,
+.btn-excluir:hover,
+.btn-concluir:hover{
+    opacity: .9;
+    transform: translateY(-2px);
+}
+
+.btn-concluir{
+    background: #008080;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    transition: .3s;
+}
+
+.btn-editar{
+    background: #2563EB;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    transition: .3s;
+}
+
+.btn-excluir{
+    background: #DC2626;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    transition: .3s;
+}
+
+.btn-adicionar{
+    background: linear-gradient(
+        135deg,
+        #4F7DCf,
+        #2F5DB3
+    );
+    transition: .3s;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-weight: bold;
+    min-width: 140px;
+}
+
+.btn-adicionar:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(79, 125, 207, .4);
+}
+
+.formulario{
+    display: flex;
+    gap: 20px;
+    background: #F8FAFC;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .05);
+    margin-bottom: 30px;
+    align-items: center;
+}
+
+.formulario input{
+    flex:1;
+}
+
+.formulario select{
+    min-width: 180px;
+}
+
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .05);
+}
+
+@media(max-width:1024px){
+    .formulario{
+        flex-wrap: wrap;
+    }
+}
+
+@media(max-width:768px){
+
+    .tarefa-card{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .formulario{
+        display:flex;
+        flex-direction:column;
+    }
+
+    .formulario input,
+    .formulario select,
+    .formulario button{
+        width:100%;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .acoes{
+        flex-wrap: wrap;
+    }
+
+    .acoes button{
+        flex: 1;
+    }
+}
+@keyframes aparecer{
+
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+#listaTarefas{
+    list-style: none;
+    padding: 0;
 }
